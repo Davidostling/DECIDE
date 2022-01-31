@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Parameters {
     int NUMPOINTS;
-    List<Integer> POINTS;
+    List<Coordinate> POINTS;
     int DIST;
     int LENGTH1;
     int LENGTH2;
@@ -27,7 +27,7 @@ public class Parameters {
     int Q_PTS;
 
     public Parameters(int NUMPOINTS,
-    List<Integer> POINTS){
+    List<Coordinate> POINTS){
         this.NUMPOINTS = NUMPOINTS;
         this.POINTS = POINTS;
     }
@@ -79,7 +79,7 @@ public class Parameters {
     public int getN_PTS() {
         return N_PTS;
     }
-    public List<Integer> getPOINTS() {
+    public List<Coordinate> getPOINTS() {
         return POINTS;
     }
     public int getQUADS() {
@@ -142,7 +142,7 @@ public class Parameters {
     public void setN_PTS(int n_PTS) {
         N_PTS = n_PTS;
     }
-    public void setPOINTS(List<Integer> pOINTS) {
+    public void setPOINTS(List<Coordinate> pOINTS) {
         POINTS = pOINTS;
     }
     public void setQUADS(int qUADS) {
