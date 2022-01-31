@@ -1,4 +1,5 @@
 package com.example;
+import com.example.DECIDE.LCM;
 
 import static org.junit.Assert.assertTrue;
 
