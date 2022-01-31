@@ -1,8 +1,10 @@
+package com.example;
+
 public class Coordinate{
-	double x;
-	double y;
+	Integer x;
+	Integer y;
 	
-	public Coordinate (int x, int y){
+	public Coordinate (Integer x, Integer y){
 		this.x = x;
 		this.y = y;
 	}
