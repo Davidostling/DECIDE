@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Parameters {
     int NUMPOINTS;
-    List<Integer> POINTS;
+    List<Coordinate> POINTS;
     int DIST;
     int LENGTH1;
     int LENGTH2;
