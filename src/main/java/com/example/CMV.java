@@ -106,15 +106,94 @@ public class CMV {
         }
         return false;
     }
+
+	/*
+	 *
+	 * @return true if there exists at least one set of three consecutive data points that are the vertices of a triangle with area greater than AREA1
+	 */
     private Boolean LIC3() {
-        return false;
+		List<Coordinate> points = param.getPOINTS();
+		int numPoints = param.getNUMPOINTS();
+		if (numPoints < 3)
+			return false;
+		double area1 = param.getAREA1();
+		for (int i = 0; i < numPoints - 2; i++) {
+			Coordinate one = points.get(i);
+			Coordinate two = points.get(i+1);
+			Coordinate three = points.get(i+2);
+			double area = (one.getX() * (two.getY() - three.getY()) + two.getX() * (three.getY() - one.getY()) + three.getX() * (one.getY() - two.getY())) / 2.0f;
+			if (Math.abs(area) > area1)
+				return true;
+		}
+		return false;
     }
+
+	/*
+	 *
+	 * @return true when there exists at least one set of Q PTS consecutive data points that lie in more than QUADS quadrants.
+	 */
     private Boolean LIC4() {
-        return false;
+		List<Coordinate> points = param.getPOINTS();
+		int numPoints = param.getNUMPOINTS();
+		int q_pts = param.getQ_PTS();
+		int quads = param.getQUADS();
+
+		for (int i = 0; i < numPoints - q_pts + 1; i++) {
+			int quadrant_1 = 0;
+			int quadrant_2 = 0;
+			int quadrant_3 = 0;
+			int quadrant_4 = 0;
+			for (int j = i; j < q_pts; j++) {
+				Coordinate cur_point = points.get(j);
+				int x = cur_point.getX();
+				int y = cur_point.getY();
+				if (x > 0) {
+					if (y >= 0) {
+						quadrant_1 = 1;
+					} else if (y < 0) {
+						quadrant_4 = 1;
+					}
+				} else if (x < 0) {
+					if (y >= 0) {
+						quadrant_2 = 1;
+					} else if (y < 0) {
+						quadrant_3 = 1;
+					}
+				} else {
+					if (y >= 0) {
+						quadrant_1 = 1;
+					} else if (y < 0) {
+						quadrant_3 = 1;
+					}
+				}
+
+				if ((quadrant_1 + quadrant_2 + quadrant_3 + quadrant_4) > quads)
+					return true;
+			}
+		}
+		return false;
     }
+
+	/*
+	 *
+	 * @return true There exists at least one set of two consecutive data points, (X[i],Y[i]) and (X[j],Y[j]), such that X[j] - X[i] < 0.
+	 */
     private Boolean LIC5() {
-        return false;
-    }
+		List<Coordinate> points = param.getPOINTS();
+		int numPoints = param.getNUMPOINTS();
+		if (numPoints < 2)
+			return false;
+
+		for (int i = 0; i < numPoints - 1; i++) {
+			Coordinate one = points.get(i);
+			Coordinate two = points.get(i + 1);
+			if (two.getX() - one.getX() < 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+
     private Boolean LIC6() {
         return false;
     }
