@@ -35,7 +35,7 @@ public class CMVTest{
 		
 		cmv = new CMV(param);
 		
-        assertFalse(cmv.getLicResult(12));
+        assertFalse(cmv.getCMV(12));
     }
 
 	@Test
@@ -54,7 +54,7 @@ public class CMVTest{
 		
 		cmv = new CMV(param);
 		
-        assertFalse(cmv.getLicResult(12));
+        assertFalse(cmv.getCMV(12));
     }
 	
 	@Test
@@ -74,7 +74,7 @@ public class CMVTest{
 		
 		cmv = new CMV(param);
 		
-        assertTrue(cmv.getLicResult(12));
+        assertTrue(cmv.getCMV(12));
     }
 	
 	@Test
@@ -93,7 +93,7 @@ public class CMVTest{
 		
 		cmv = new CMV(param);
 		
-        assertFalse(cmv.getLicResult(13));
+        assertFalse(cmv.getCMV(13));
     }
 	
 	@Test
@@ -116,7 +116,7 @@ public class CMVTest{
 		
 		cmv = new CMV(param);
 		
-        assertFalse(cmv.getLicResult(13));
+        assertFalse(cmv.getCMV(13));
     }
 	
 	@Test
@@ -139,7 +139,7 @@ public class CMVTest{
 		
 		cmv = new CMV(param);
 		
-        assertTrue(cmv.getLicResult(13));
+        assertTrue(cmv.getCMV(13));
     }
 	
 	@Test
@@ -158,7 +158,7 @@ public class CMVTest{
 		
 		cmv = new CMV(param);
 		
-        assertFalse(cmv.getLicResult(14));
+        assertFalse(cmv.getCMV(14));
     }
 	
 	@Test
@@ -181,7 +181,7 @@ public class CMVTest{
 		
 		cmv = new CMV(param);
 		
-        assertFalse(cmv.getLicResult(14));
+        assertFalse(cmv.getCMV(14));
     }
 	
 	@Test
@@ -204,7 +204,7 @@ public class CMVTest{
 		
 		cmv = new CMV(param);
 		
-        assertTrue(cmv.getLicResult(14));
+        assertTrue(cmv.getCMV(14));
     }
 
     @Test
