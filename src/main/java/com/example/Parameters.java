@@ -13,7 +13,7 @@ public class Parameters {
     int RADIUS2;
     int AREA1;
     int AREA2;
-    int EPSILON;
+    double EPSILON;
     int QUADS;
     int N_PTS;
     int K_PTS;
@@ -52,7 +52,7 @@ public class Parameters {
     public int getD_PTS() {
         return D_PTS;
     }
-    public int getEPSILON() {
+    public double getEPSILON() {
         return EPSILON;
     }
     public int getE_PTS() {
@@ -115,7 +115,7 @@ public class Parameters {
     public void setD_PTS(int d_PTS) {
         D_PTS = d_PTS;
     }
-    public void setEPSILON(int ePSILON) {
+    public void setEPSILON(double ePSILON) {
         EPSILON = ePSILON;
     }
     public void setE_PTS(int e_PTS) {
