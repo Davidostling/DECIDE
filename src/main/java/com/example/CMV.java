@@ -45,6 +45,11 @@ public class CMV {
         }
         return false;
     }
+    /**
+     * 
+     * @return True if there exists at least one set of three consecutive data points that cannot all be contained within or on a circle of radius RADIUS1. 
+     * otherwise False
+     */
     private Boolean LIC1() {
         List<Coordinate> points = param.getPOINTS();
         int numPoints = param.getNUMPOINTS();
@@ -55,6 +60,7 @@ public class CMV {
             Coordinate one = points.get(i);
             Coordinate two = points.get(i+1);
             Coordinate three = points.get(i+2);
+            //gets the centroid of the three points
             double centerX = (one.getX()+two.getX()+three.getX())/3;
             double centerY = (one.getY()+two.getY()+three.getY())/3;
             if(getDistance(one.getX(), one.getY(), centerX, centerY) > radius)
