@@ -1,40 +1,51 @@
 package com.example;
+import java.util.List;
 
 import java.util.List;
 import java.lang.Math;
 
 public class CMV {
     Parameters param;
-    Boolean[] cmv = new Boolean[15];
+    Boolean[] cmv;
 
     public CMV(Parameters param){
         this.param = param;
-        this.setCMV();
+        cmv = new Boolean[15];
+        setCMV();
     }
     public void setCMV(){
-        cmv[0] = LIC0();
-        cmv[1] = LIC1();
-		cmv[2] = LIC2();
-        cmv[3] = LIC3();
-		cmv[4] = LIC4();
-        cmv[5] = LIC5();
-		cmv[6] = LIC6();
-        cmv[7] = LIC7();
-		cmv[8] = LIC8();
-        cmv[9] = LIC9();
-		cmv[10] = LIC10();
+        cmv[0]  = LIC0();
+        cmv[1]  = LIC1();
+        cmv[2]  = LIC2();
+        cmv[3]  = LIC3();
+        cmv[4]  = LIC4();
+        cmv[5]  = LIC5();
+        cmv[6]  = LIC6();
+        cmv[7]  = LIC7();
+        cmv[8]  = LIC8();
+        cmv[9]  = LIC9();
+        cmv[10] = LIC10();
         cmv[11] = LIC11();
-		cmv[12] = LIC12();
+        cmv[12] = LIC12();
         cmv[13] = LIC13();
-		cmv[14] = LIC14();
-
+        cmv[14] = LIC14();
     }
-	
-	public boolean getLicResult(int i){
-		return cmv[i];
-	}
+    public Boolean getCMV(int index){
+        return cmv[index];
+    }
 
+    /**
+     * Function for calculating LIC0
+     * @return true if there are two points greater than LENGTH1 distance apart otherwise false
+     */
     private Boolean LIC0() {
+        List<Coordinate> points = param.getPOINTS();
+        int numPoints = param.getNUMPOINTS();
+        int length = param.getLENGTH1();
+        for (int i = 0; i < numPoints-1; i++) {
+            if(getDistance(points.get(i).getX(),  points.get(i).getY(),  points.get(i+1).getX(),  points.get(i+1).getY()) > length)
+                return true;
+        }
         return false;
     }
     private Boolean LIC1() {
@@ -56,8 +67,26 @@ public class CMV {
         return false;
     }
     private Boolean LIC7() {
+        List<Coordinate> points = param.getPOINTS();
+        int k_pts = param.getK_PTS();
+        int numpoints = param.getNUMPOINTS();
+        int length1 = param.getLENGTH1();
+        if(numpoints<3){
+            return false;
+        }
+        for(int i=0; i<numpoints-k_pts-1; i++) {
+            int x1 = points.get(i).getX();
+            int y1 = points.get(i).getY();
+            int x2 = points.get(i + k_pts + 1).getX();
+            int y2 = points.get(i + k_pts + 1).getY();
+            double length = getDistance(x1,y1,x2,y2);
+            if (length > length1) {
+                return true;
+            }
+        }
         return false;
     }
+
     private Boolean LIC8() {
         return false;
     }
@@ -268,16 +297,11 @@ public class CMV {
 		// Otherwise return false
         return false;
     }
-	
-	
-	/*
-	* Functions that returns the distance between two points in a 2D plane
-	*/
 	private double getDistance(Integer firstPointX, Integer firstPointY, Integer secondPointX, Integer secondPointY){
 		// Distance formula
 		// distance = squareroot((x2 - x1)^2 + (y2 - y1)^2)
 		double distance = Math.sqrt(Math.pow((secondPointX - firstPointX), 2) + Math.pow((secondPointY - firstPointY), 2));
-		
+
 		return distance;
 	}
 
