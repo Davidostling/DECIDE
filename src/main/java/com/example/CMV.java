@@ -35,9 +35,32 @@ public class CMV {
     private Boolean LIC6() {
         return false;
     }
-    private Boolean LIC7() {
+    private Boolean LIC7(double[] X, double[] Y, int numpoints, double length1, int k_pts) {
+        double x1; 
+        double y1; 
+        double x2; 
+        double y2;
+        if(numpoints<3){
+            return false;
+        }
+        if (1 > k_pts || k_pts > (numpoints - 2)){
+            return false;
+        }
+        for(int i=0; i<numpoints-k_pts-1; i++) {
+            x1 = X[i];
+            y1 = Y[i];
+            x2 = X[i + k_pts + 1];
+            y2 = Y[i + k_pts + 1];
+            double ac = Math.abs(y2 - y1);
+            double cb = Math.abs(x2 - x1);
+            double length = Math.hypot(ac, cb);
+            if (length > length1) {
+                return true;
+            }
+        }
         return false;
     }
+
     private Boolean LIC8() {
         return false;
     }
