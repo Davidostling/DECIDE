@@ -280,4 +280,45 @@ public class CMVTest{
         
     }
 
+
+	@Test
+	public void lic3_too_few_points(){
+		points.add(new Coordinate(0,0));
+		points.add(new Coordinate(1,1));
+
+		Parameters param = new Parameters(points.size(), points);
+		param.setAREA1(1);
+
+		cmv = new CMV(param);
+		assertFalse(cmv.getCMV(3));
+	}
+
+	@Test
+	public void lic3_false(){
+		points.add(new Coordinate(0,0));
+		points.add(new Coordinate(1,1));
+		points.add(new Coordinate(2,2));
+		points.add(new Coordinate(3,3));
+
+		Parameters param = new Parameters(points.size(), points);
+		param.setAREA1(100);
+
+		cmv = new CMV(param);
+		assertFalse(cmv.getCMV(3));
+	}
+
+	@Test
+	public void lic3_true(){
+		points.add(new Coordinate(0,0));
+		points.add(new Coordinate(10,10));
+		points.add(new Coordinate(20,0));
+		points.add(new Coordinate(30,30));
+
+		Parameters param = new Parameters(points.size(), points);
+		param.setAREA1(1);
+
+		cmv = new CMV(param);
+		assertTrue(cmv.getCMV(3));
+	}
+
 }

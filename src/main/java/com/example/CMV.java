@@ -82,9 +82,28 @@ public class CMV {
         }
         return false;
     }
+
+	/*
+	 *
+	 * @return true if there exists at least one set of three consecutive data points that are the vertices of a triangle with area greater than AREA1
+	 */
     private Boolean LIC3() {
-        return false;
+		List<Coordinate> points = param.getPOINTS();
+		int numPoints = param.getNUMPOINTS();
+		if (numPoints < 3)
+			return false;
+		double area1 = param.getAREA1();
+		for (int i = 0; i < numPoints - 2; i++) {
+			Coordinate one = points.get(i);
+			Coordinate two = points.get(i+1);
+			Coordinate three = points.get(i+2);
+			double area = (one.getX() * (two.getY() - three.getY()) + two.getX() * (three.getY() - one.getY()) + three.getX() * (one.getY() - two.getY())) / 2.0f;
+			if (Math.abs(area) > area1)
+				return true;
+		}
+		return false;
     }
+
     private Boolean LIC4() {
         return false;
     }
