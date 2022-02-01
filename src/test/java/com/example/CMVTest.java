@@ -321,4 +321,50 @@ public class CMVTest{
 		assertTrue(cmv.getCMV(3));
 	}
 
+	@Test
+	public void lic4_false_one(){
+		points.add(new Coordinate(0,0));
+		points.add(new Coordinate(1,1));
+		points.add(new Coordinate(2,2));
+		points.add(new Coordinate(3,-1));
+
+		Parameters param = new Parameters(points.size(), points);
+		param.setQ_PTS(4);
+		param.setQUADS(2);
+
+		cmv = new CMV(param);
+		assertFalse(cmv.getCMV(4));
+	}
+
+	@Test
+	public void lic4_true_one(){
+		points.add(new Coordinate(0,0));
+		points.add(new Coordinate(-1,1));
+		points.add(new Coordinate(-1,-1));
+		points.add(new Coordinate(1,-1));
+
+		Parameters param = new Parameters(points.size(), points);
+		param.setQ_PTS(4);
+		param.setQUADS(2);
+
+		cmv = new CMV(param);
+		assertTrue(cmv.getCMV(4));
+	}
+
+	@Test
+	public void lic4_false_two(){
+		// Not consecutive data points
+		points.add(new Coordinate(1,1));
+		points.add(new Coordinate(-1,1));
+		points.add(new Coordinate(-1,-1));
+		points.add(new Coordinate(1,-1));
+
+		Parameters param = new Parameters(points.size(), points);
+		param.setQ_PTS(3);
+		param.setQUADS(3);
+
+		cmv = new CMV(param);
+		assertFalse(cmv.getCMV(4));
+	}
+
 }

@@ -104,8 +104,50 @@ public class CMV {
 		return false;
     }
 
+	/*
+	 *
+	 * @return true when there exists at least one set of Q PTS consecutive data points that lie in more than QUADS quadrants.
+	 */
     private Boolean LIC4() {
-        return false;
+		List<Coordinate> points = param.getPOINTS();
+		int numPoints = param.getNUMPOINTS();
+		int q_pts = param.getQ_PTS();
+		int quads = param.getQUADS();
+
+		for (int i = 0; i < numPoints - q_pts + 1; i++) {
+			int quadrant_1 = 0;
+			int quadrant_2 = 0;
+			int quadrant_3 = 0;
+			int quadrant_4 = 0;
+			for (int j = i; j < q_pts; j++) {
+				Coordinate cur_point = points.get(j);
+				int x = cur_point.getX();
+				int y = cur_point.getY();
+				if (x > 0) {
+					if (y >= 0) {
+						quadrant_1 = 1;
+					} else if (y < 0) {
+						quadrant_4 = 1;
+					}
+				} else if (x < 0) {
+					if (y >= 0) {
+						quadrant_2 = 1;
+					} else if (y < 0) {
+						quadrant_3 = 1;
+					}
+				} else {
+					if (y >= 0) {
+						quadrant_1 = 1;
+					} else if (y < 0) {
+						quadrant_3 = 1;
+					}
+				}
+
+				if ((quadrant_1 + quadrant_2 + quadrant_3 + quadrant_4) > quads)
+					return true;
+			}
+		}
+		return false;
     }
     private Boolean LIC5() {
         return false;
