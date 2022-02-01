@@ -1,5 +1,7 @@
 package com.example;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
@@ -8,40 +10,42 @@ import org.junit.Test;
 /**
  * Unit test for the FUV class
  */
-public class FUVTest
+public class FUVTest{
 	FUV fuv;
-	PUM pum;
+	Boolean[][] pum = new Boolean[15][15];
 	Boolean[] puv = new Boolean[15];
-{
+	
     @Test
-    public void fuv_false(){
-		Arrays.fill(puv, false);
+    public void pum_row_incorrect(){
 		
-		//SET A TEST CASE FOR PUM ONCE IMPLEMENTED
+		Arrays.fill(puv, false);
+		puv[0] = true;
+		Arrays.fill(pum[0], false); 
 		
 		fuv = new FUV(pum, puv);
 		
-		// IMPLEMENT PROPER TESTING ONCE PUM IS IMPLEMENTED
-        //assertFalse(fuv.getFUV(0));
-		//assertFalse(fuv.getFUV(14));
-		
-		assertFalse(false);
+        assertFalse(fuv.getFUV(0));
     }
 	
 	@Test
-    public void fuv_true(){
+    public void puv_correct(){
 		
 		Arrays.fill(puv, false);
-		puv[0] = false;
-		
-		//SET A TEST CASE FOR PUM ONCE IMPLEMENTED
 		
 		fuv = new FUV(pum, puv);
 		
-		// IMPLEMENT PROPER TESTING ONCE PUM IS IMPLEMENTED
-        //assertTrue(fuv.getFUV(0)); 	// Should be true from just puv being false
-		//assertTrue(fuv.getFUV(14)); 	// SHould be true from all PUM in row being true
+        assertTrue(fuv.getFUV(0)); 
+    }
+	
+	@Test
+    public void pum_row_correct(){
 		
-        assertTrue( true );
+		Arrays.fill(puv, false);
+		puv[0] = true;
+		Arrays.fill(pum[0], true); 
+		
+		fuv = new FUV(pum, puv);
+		
+        assertTrue(fuv.getFUV(0)); 
     }
 }
