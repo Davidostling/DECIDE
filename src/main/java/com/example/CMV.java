@@ -51,7 +51,35 @@ public class CMV {
     private Boolean LIC1() {
         return false;
     }
+    /**
+     * 
+     * @return true if there exists at least one set of three consecutive data points which form an angle such that:
+     * angle < (PI−EPSILON)
+     * or
+     * angle > (PI+EPSILON)
+     * else false
+     **/
     private Boolean LIC2() {
+        List<Coordinate> points = param.getPOINTS();
+        int numPoints = param.getNUMPOINTS();
+        if(numPoints < 3)
+            return false;
+        double epsilon = param.getEPSILON();
+        for (int i = 0; i < numPoints-2; i++) {
+            Coordinate one = points.get(i);
+            Coordinate two = points.get(i+1);
+            Coordinate three = points.get(i+2);
+            //sets vector a and b in relating to the second point
+            int xa = one.getX()-two.getX();
+            int ya = one.getY()-two.getY();
+            int xb = three.getX()-two.getX();
+            int yb = three.getY()-two.getY();
+            double angle = Math.acos((xa * xb + ya * yb) / Math.sqrt(Math.pow(xa, 2) + Math.pow(ya, 2)) * Math.sqrt(Math.pow(xb, 2) + Math.pow(yb, 2)));
+            if(angle < Math.PI-epsilon)
+                return true;
+            if(angle > Math.PI+epsilon)
+                return true;
+        }
         return false;
     }
     private Boolean LIC3() {

@@ -4,6 +4,7 @@ import com.example.CMV;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.lang.Math;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
@@ -254,6 +255,29 @@ public class CMVTest{
         param.setLENGTH1(14);
         cmv = new CMV(param);
         assertFalse(cmv.getCMV(7));
+    }
+
+    @Test
+    public void lic2_true(){
+        points.add(new Coordinate(1, 1));
+        points.add(new Coordinate(2, 2));
+        points.add(new Coordinate(3, 1));
+        Parameters param = new Parameters(points.size(), points);
+        param.setEPSILON(0);
+        cmv = new CMV(param);
+        assertTrue(cmv.getCMV(2));
+    }
+
+    @Test
+    public void lic2_false(){
+        points.add(new Coordinate(1, 1));
+        points.add(new Coordinate(2, 2));
+        points.add(new Coordinate(3, 1));
+        Parameters param = new Parameters(points.size(), points);
+        param.setEPSILON(Math.PI/2);
+        cmv = new CMV(param);
+        assertFalse(cmv.getCMV(2));
+        
     }
 
 }
