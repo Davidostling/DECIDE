@@ -1,4 +1,5 @@
 package com.example;
+import java.util.List;
 
 public class CMV {
     Parameters param;
@@ -30,7 +31,18 @@ public class CMV {
         return cmv[index];
     }
 
+    /**
+     * Function for calculating LIC0
+     * @return true if there are two points greater than LENGTH1 distance apart otherwise false
+     */
     private Boolean LIC0() {
+        List<Coordinate> points = param.getPOINTS();
+        int numPoints = param.getNUMPOINTS();
+        int length = param.getLENGTH1();
+        for (int i = 0; i < numPoints-1; i++) {
+            if(getDistance(points.get(i).getX(),  points.get(i).getY(),  points.get(i+1).getX(),  points.get(i+1).getY()) > length)
+                return true;
+        }
         return false;
     }
     private Boolean LIC1() {
@@ -75,6 +87,16 @@ public class CMV {
     private Boolean LIC14() {
         return false;
     }
+    /*
+	* Functions that returns the distance between two points in a 2D plane
+	*/
+	private double getDistance(Integer firstPointX, Integer firstPointY, Integer secondPointX, Integer secondPointY){
+		// Distance formula
+		// distance = squareroot((x2 - x1)^2 + (y2 - y1)^2)
+		double distance = Math.sqrt(Math.pow((secondPointX - firstPointX), 2) + Math.pow((secondPointY - firstPointY), 2));
+
+		return distance;
+	}
 
     
 }
