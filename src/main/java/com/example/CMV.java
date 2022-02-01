@@ -48,7 +48,31 @@ public class CMV {
         }
         return false;
     }
+    /**
+     * 
+     * @return True if there exists at least one set of three consecutive data points that cannot all be contained within or on a circle of radius RADIUS1. 
+     * otherwise False
+     */
     private Boolean LIC1() {
+        List<Coordinate> points = param.getPOINTS();
+        int numPoints = param.getNUMPOINTS();
+        if(numPoints < 3)
+            return false;
+        int radius = param.getRADIUS1();
+        for (int i = 0; i < numPoints-2; i++) {
+            Coordinate one = points.get(i);
+            Coordinate two = points.get(i+1);
+            Coordinate three = points.get(i+2);
+            //gets the centroid of the three points
+            double centerX = (one.getX()+two.getX()+three.getX())/3;
+            double centerY = (one.getY()+two.getY()+three.getY())/3;
+            if(getDistanceOneDouble(one.getX(), one.getY(), centerX, centerY) > radius)
+                return true;
+            if(getDistanceOneDouble(two.getX(), two.getY(), centerX, centerY) > radius)
+                return true;
+            if(getDistanceOneDouble(three.getX(), three.getY(), centerX, centerY) > radius)
+                return true;
+        }
         return false;
     }
     /**
@@ -325,11 +349,25 @@ public class CMV {
 		// Otherwise return false
         return false;
     }
+  
+    /*
+	* Functions that returns the distance between two points in a 2D plane
+    * All integers
+	*/
 	private double getDistance(Integer firstPointX, Integer firstPointY, Integer secondPointX, Integer secondPointY){
 		// Distance formula
 		// distance = squareroot((x2 - x1)^2 + (y2 - y1)^2)
 		double distance = Math.sqrt(Math.pow((secondPointX - firstPointX), 2) + Math.pow((secondPointY - firstPointY), 2));
-
+		return distance;
+	}
+    /*
+	* Functions that returns the distance between two points in a 2D plane
+    * First point is integer and second point is double
+	*/
+	private double getDistanceOneDouble(Integer firstPointX, Integer firstPointY, double secondPointX, double secondPointY){
+		// Distance formula
+		// distance = squareroot((x2 - x1)^2 + (y2 - y1)^2)
+		double distance = Math.sqrt(Math.pow((secondPointX - firstPointX), 2) + Math.pow((secondPointY - firstPointY), 2));
 		return distance;
 	}
 
