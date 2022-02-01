@@ -6,8 +6,8 @@ public class CMV {
 
     public CMV(Parameters param){
         this.param = param;
-        setCMV();
         cmv = new Boolean[15];
+        setCMV();
     }
     public void setCMV(){
         cmv[0]  = LIC0();
