@@ -14,4 +14,7 @@ public class FUV {
     public void setFUV(){
 
     }
+    public Boolean[] getFUVVector(){
+        return fuv;
+    }
 }
