@@ -149,9 +149,27 @@ public class CMV {
 		}
 		return false;
     }
+
+	/*
+	 *
+	 * @return true There exists at least one set of two consecutive data points, (X[i],Y[i]) and (X[j],Y[j]), such that X[j] - X[i] < 0.
+	 */
     private Boolean LIC5() {
-        return false;
-    }
+		List<Coordinate> points = param.getPOINTS();
+		int numPoints = param.getNUMPOINTS();
+		if (numPoints < 2)
+			return false;
+
+		for (int i = 0; i < numPoints - 1; i++) {
+			Coordinate one = points.get(i);
+			Coordinate two = points.get(i + 1);
+			if (two.getX() - one.getX() < 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+
     private Boolean LIC6() {
         return false;
     }
