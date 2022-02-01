@@ -26,10 +26,15 @@ public class DECIDE
         cmv = new CMV(param);
         pum = new PUM(cmv, lcm);
         fuv = new FUV(pum, puv);
-        setLAUNCH();
+        launch = getLAUNCH(fuv.getFUVVector());
     }
-    public void setLAUNCH() {
-
+    public static LAUNCH getLAUNCH(Boolean[] fuv) {
+        for (Boolean b : fuv) {
+            if(!b){
+                return LAUNCH.NO;
+            }
+        }
+        return LAUNCH.YES;
     }
 
     public static void main( String[] args )
