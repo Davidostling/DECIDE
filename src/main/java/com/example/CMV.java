@@ -66,11 +66,11 @@ public class CMV {
             //gets the centroid of the three points
             double centerX = (one.getX()+two.getX()+three.getX())/3;
             double centerY = (one.getY()+two.getY()+three.getY())/3;
-            if(getDistance(one.getX(), one.getY(), centerX, centerY) > radius)
+            if(getDistanceOneDouble(one.getX(), one.getY(), centerX, centerY) > radius)
                 return true;
-            if(getDistance(two.getX(), two.getY(), centerX, centerY) > radius)
+            if(getDistanceOneDouble(two.getX(), two.getY(), centerX, centerY) > radius)
                 return true;
-            if(getDistance(three.getX(), three.getY(), centerX, centerY) > radius)
+            if(getDistanceOneDouble(three.getX(), three.getY(), centerX, centerY) > radius)
                 return true;
         }
         return false;
@@ -336,7 +336,7 @@ public class CMV {
 	* Functions that returns the distance between two points in a 2D plane
     * First point is integer and second point is double
 	*/
-	private double getDistance(Integer firstPointX, Integer firstPointY, double secondPointX, double secondPointY){
+	private double getDistanceOneDouble(Integer firstPointX, Integer firstPointY, double secondPointX, double secondPointY){
 		// Distance formula
 		// distance = squareroot((x2 - x1)^2 + (y2 - y1)^2)
 		double distance = Math.sqrt(Math.pow((secondPointX - firstPointX), 2) + Math.pow((secondPointY - firstPointY), 2));
