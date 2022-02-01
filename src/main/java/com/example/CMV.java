@@ -78,7 +78,7 @@ public class CMV {
 	* 
 	* Both Must be present for the LIC to return true
 	* Returns false if there are less than 3 NUMPOINTS
-	* Length are greater than or equal to 0
+	* Lengths are greater than or equal to 0
 	*/
     private Boolean LIC12() {
 		// Get all values required to calculating conditions
@@ -126,9 +126,9 @@ public class CMV {
 	
 	/*
 	* Checks if there is at least one set of three points seperated by A_PTS and
-	* B_PTS consecutive intervening points that cannot be contained or exists on 
-	* a circle of a radius of RADIUS1 as well as one of a radius of RADIUS2. The
-	* set of points can either be the same or different
+	* B_PTS respectively consecutive intervening points that cannot be contained or 
+	* exists on a circle of a radius of RADIUS1 as well as one of a radius of RADIUS2. 
+	* The set of points can either be the same or different
 	*
 	* Both Must be present for the LIC to return true
 	* Returns false if there are less than 5 NUMPOINTS
@@ -209,7 +209,63 @@ public class CMV {
         return false;
     }
 	
+	/*
+	* Checks if there is at least one set of three points seperated by E_PTS respectively 
+	* and F_PTS consecutive intervening points that are the vertices of a triangle of an 
+	* area greater than AREA1 as well as one of an area less than AREA2. The
+	* set of points can either be the same or different
+	*
+	* Both Must be present for the LIC to return true
+	* Returns false if there are less than 5 NUMPOINTS
+	* Areas are greater than or equal to 0
+	*/
     private Boolean LIC14() {
+		// Get all values required to calculating conditions
+		List<Coordinate> points = param.getPOINTS();
+		int numPoints = param.getNUMPOINTS();
+		
+		int e_pts = param.getE_PTS();
+		int f_pts = param.getF_PTS();
+		int area1 = param.getAREA1();
+		int area2 = param.getAREA2();
+		
+		// If the number of points are less than 5 return false
+		if(numPoints < 5){
+			return false;
+		}
+		
+		// The two conditions
+		boolean greater_than_area1 = false;
+		boolean lesser_than_area2 = false;
+		
+		for(int i = 0; i < numPoints && i + e_pts < numPoints && i + f_pts < numPoints; i++){
+			Integer firstPointX = points.get(i).getX();
+			Integer firstPointY = points.get(i).getY();
+			
+			Integer secondPointX = points.get(i + e_pts).getX();
+			Integer secondPointY = points.get(i + e_pts).getY();
+			
+			Integer thirdPointX = points.get(i + f_pts).getX();
+			Integer thirdPointY = points.get(i + f_pts).getY();
+			
+			// Area of a triangle based upon three points
+			// absolute value((x1(y2 - y3) + x2(y3 - y1) + x3(y1 - y2)) / 2)
+			double area = Math.abs((firstPointX * (secondPointY - thirdPointY) + secondPointX * (thirdPointY - firstPointY) + thirdPointX * (firstPointY - secondPointY)) / 2);
+			
+			if(area > area1 ){
+				greater_than_area1 = true;
+			}
+			if(area < area2){
+				lesser_than_area2 = true;
+			}
+			
+			// If both conditions are met return true
+			if(greater_than_area1 && lesser_than_area2){
+				return true;
+			}
+		}
+		
+		// Otherwise return false
         return false;
     }
 	
