@@ -74,4 +74,69 @@ public class CMVTest{
 		
         assertTrue(cmv.getLicResult(12));
     }
+	
+	@Test
+    public void lic13_too_few_points(){
+		points.add(new Coordinate(0,0));
+		points.add(new Coordinate(1,1));
+		points.add(new Coordinate(2,3));
+		points.add(new Coordinate(2,3));
+		
+		param = new Parameters(points.size(), points);
+		
+		param.setA_PTS(2);
+		param.setB_PTS(2);
+		param.setRADIUS1(2);
+		param.setRADIUS2(2);
+		
+		cmv = new CMV(param);
+		
+        assertFalse(cmv.getLicResult(13));
+    }
+	
+	@Test
+    public void lic13_one_true(){
+		points.add(new Coordinate(0,0));
+		points.add(new Coordinate(0,2));
+		points.add(new Coordinate(1,1)); 
+		points.add(new Coordinate(2,1)); 
+		points.add(new Coordinate(2,2));
+		points.add(new Coordinate(3,1)); 
+		points.add(new Coordinate(3,2));
+		points.add(new Coordinate(4,3));
+		
+		param = new Parameters(points.size(), points);
+		
+		param.setA_PTS(3);
+		param.setB_PTS(5);
+		param.setRADIUS1(2);
+		param.setRADIUS2(1);
+		
+		cmv = new CMV(param);
+		
+        assertFalse(cmv.getLicResult(13));
+    }
+	
+	@Test
+    public void lic13_both_true(){
+		points.add(new Coordinate(0,0));
+		points.add(new Coordinate(0,2));
+		points.add(new Coordinate(1,1)); 
+		points.add(new Coordinate(2,1)); 
+		points.add(new Coordinate(2,2));
+		points.add(new Coordinate(3,1)); 
+		points.add(new Coordinate(3,2));
+		points.add(new Coordinate(4,3));
+		
+		param = new Parameters(points.size(), points);
+		
+		param.setA_PTS(3);
+		param.setB_PTS(5);
+		param.setRADIUS1(2);
+		param.setRADIUS2(3);
+		
+		cmv = new CMV(param);
+		
+        assertTrue(cmv.getLicResult(13));
+    }
 }

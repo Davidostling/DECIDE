@@ -105,10 +105,7 @@ public class CMV {
 			Integer secondPointX = points.get(i + k_pts).getX();
 			Integer secondPointY = points.get(i + k_pts).getY();
 			
-			// Distance formula
-			// distance = squareroot((x2 - x1)^2 + (y2 - y1)^2)
-			double distance = Math.sqrt(Math.pow((secondPointX - firstPointX), 2) + Math.pow((secondPointY - firstPointY), 2));
-			
+			double distance = getDistance(firstPointX, firstPointY, secondPointX, secondPointY);
 			
 			if(distance > length1 ){
 				greater_than_length1 = true;
@@ -126,12 +123,107 @@ public class CMV {
 		// Otherwise return false
         return false;
     }
+	
+	/*
+	* Checks if there is at least one set of three points seperated by A_PTS and
+	* B_PTS consecutive intervening points that cannot be contained or exists on 
+	* a circle of a radius of RADIUS1 as well as one of a radius of RADIUS2. The
+	* set of points can either be the same or different
+	*
+	* Both Must be present for the LIC to return true
+	* Returns false if there are less than 5 NUMPOINTS
+	* radius are greater than or equal to 0
+	*/
     private Boolean LIC13() {
+        // Get all values required to calculating conditions
+		List<Coordinate> points = param.getPOINTS();
+		int numPoints = param.getNUMPOINTS();
+		
+		int a_pts = param.getA_PTS();
+		int b_pts = param.getB_PTS();
+		int radius1 = param.getRADIUS1();
+		int radius2 = param.getRADIUS2();	
+		
+		// If the number of points are less than 5 return false
+		if(numPoints < 5){
+			return false;
+		}
+		
+		// The two conditions
+		boolean fits_radius1 = false;
+		boolean fits_radius2 = false;
+		
+		for(int i = 0; i < numPoints && i + a_pts < numPoints && i + b_pts < numPoints; i++){
+			Integer firstPointX = points.get(i).getX();
+			Integer firstPointY = points.get(i).getY();
+			
+			Integer secondPointX = points.get(i + a_pts).getX();
+			Integer secondPointY = points.get(i + a_pts).getY();
+			
+			Integer thirdPointX = points.get(i + b_pts).getX();
+			Integer thirdPointY = points.get(i + b_pts).getY();
+			
+			double distanceFirstToSecond = getDistance(firstPointX, firstPointY, secondPointX, secondPointY);
+			double distanceSecondToThird = getDistance(secondPointX, secondPointY, thirdPointX, thirdPointY);
+			double distanceFirstToThird = getDistance(firstPointX, firstPointY, thirdPointX, thirdPointY);
+			
+			// Checks that the destance between the points are less or equal to the radius
+			// Assumes that one of the points are the middle of the circle
+			
+			// First point middle
+			if(distanceFirstToSecond <= radius1 && distanceFirstToThird <= radius1){
+				fits_radius1 = true;
+			}
+			// second point middle
+			if(distanceFirstToSecond <= radius1 && distanceSecondToThird <= radius1){
+				fits_radius1 = true;
+			}
+			// third point middle
+			if(distanceFirstToThird <= radius1 && distanceSecondToThird <= radius1){
+				fits_radius1 = true;
+			}
+			
+			
+			// First point middle
+			if(distanceFirstToSecond <= radius2 && distanceFirstToThird <= radius2){
+				fits_radius2 = true;
+			}
+			// second point middle
+			if(distanceFirstToSecond <= radius2 && distanceSecondToThird <= radius2){
+				fits_radius2 = true;
+			}
+			// third point middle
+			if(distanceFirstToThird <= radius2 && distanceSecondToThird <= radius2){
+				fits_radius2 = true;
+			}
+
+			
+			
+			// If both conditions are met return true
+			if(fits_radius1 && fits_radius2){
+				return true;
+			}
+		}
+		
+		// Otherwise return false
         return false;
     }
+	
     private Boolean LIC14() {
         return false;
     }
+	
+	
+	/*
+	* Functions that returns the distance between two points in a 2D plane
+	*/
+	private double getDistance(Integer firstPointX, Integer firstPointY, Integer secondPointX, Integer secondPointY){
+		// Distance formula
+		// distance = squareroot((x2 - x1)^2 + (y2 - y1)^2)
+		double distance = Math.sqrt(Math.pow((secondPointX - firstPointX), 2) + Math.pow((secondPointY - firstPointY), 2));
+		
+		return distance;
+	}
 
     
 }
