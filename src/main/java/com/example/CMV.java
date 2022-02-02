@@ -208,13 +208,25 @@ public class CMV {
 		if(numpoints<3) {
 			return false;
 		}
-		for(int i = 1; i < points.size()-1; i++) {
-			double distance = Math.abs((lastPoint.getX() - firstPoint.getX()) * (firstPoint.getY() - points.get(i).getY())
-					- (firstPoint.getX() - points.get(i).getX()) * (lastPoint.getY() - firstPoint.getY()))
-					/ Math.sqrt(Math.pow(lastPoint.getX() - firstPoint.getX(), 2) + Math.pow(lastPoint.getY() - firstPoint.getY(), 2));
-			if(distance > dist) {
-				return true;
+		if(firstPoint.getX()== lastPoint.getX() && firstPoint.getY()==lastPoint.getY()){
+			for(int i = 1; i < points.size()-1; i++) {
+				double distance = getDistance(points.get(i).getX(),points.get(i).getY(), firstPoint.getX(), firstPoint.getY());
+				if (distance > dist) {
+					return true;
+				}
+				return false;
 			}
+		}
+		else {
+			for (int i = 1; i < points.size() - 1; i++) {
+				double distance = Math.abs((lastPoint.getX() - firstPoint.getX()) * (firstPoint.getY() - points.get(i).getY())
+						- (firstPoint.getX() - points.get(i).getX()) * (lastPoint.getY() - firstPoint.getY()))
+						/ Math.sqrt(Math.pow(lastPoint.getX() - firstPoint.getX(), 2) + Math.pow(lastPoint.getY() - firstPoint.getY(), 2));
+				if (distance > dist) {
+					return true;
+				}
+			}
+			return false;
 		}
 		return false;
     }
