@@ -32,6 +32,9 @@ public class CMV {
     public Boolean getCMV(int index){
         return cmv[index];
     }
+	public Boolean[] getCMVVector(){
+		return cmv;
+	}
 
     /**
      * Function for calculating LIC0
