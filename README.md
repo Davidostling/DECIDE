@@ -66,6 +66,8 @@ Sebaztian: I programmed Lic12, LIC13, LIC14 and FUV with three unit tests includ
 
 David: Me and Johan created the skeleton for the program by forming the classes and methods needed. I also coded LIC9, LIC10 and LIC11 together with their corresponding tests. I also wrote our way-of-working paragraph.
 
+Zehao: I implemented LIC3, LIC4 and LIC5 and their corresponding three unit tests. I also set up the skeleton code for the whole test for CMV function. 
+
 Program specification (January 1986):
 - J. C. Knight
 - N. G. Leveson
