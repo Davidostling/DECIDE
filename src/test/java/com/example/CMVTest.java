@@ -62,7 +62,7 @@ public class CMVTest{
     public void lic12_both_true(){
 		points.add(new Coordinate(0,0));
 		points.add(new Coordinate(1,1));
-	    	points.add(new Coordinate(2,2))
+	    	points.add(new Coordinate(2,2));
 		points.add(new Coordinate(2,3));
 		points.add(new Coordinate(2,3));
 		points.add(new Coordinate(3,3));
