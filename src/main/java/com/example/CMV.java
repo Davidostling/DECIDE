@@ -1,6 +1,8 @@
 package com.example;
 import java.util.List;
 
+import java.lang.Math;
+
 public class CMV {
     Parameters param;
     Boolean[] cmv;
@@ -45,24 +47,175 @@ public class CMV {
         }
         return false;
     }
+    /**
+     * 
+     * @return True if there exists at least one set of three consecutive data points that cannot all be contained within or on a circle of radius RADIUS1. 
+     * otherwise False
+     */
     private Boolean LIC1() {
+        List<Coordinate> points = param.getPOINTS();
+        int numPoints = param.getNUMPOINTS();
+        if(numPoints < 3)
+            return false;
+        int radius = param.getRADIUS1();
+        for (int i = 0; i < numPoints-2; i++) {
+            Coordinate one = points.get(i);
+            Coordinate two = points.get(i+1);
+            Coordinate three = points.get(i+2);
+            //gets the centroid of the three points
+            double centerX = (one.getX()+two.getX()+three.getX())/3;
+            double centerY = (one.getY()+two.getY()+three.getY())/3;
+            if(getDistanceOneDouble(one.getX(), one.getY(), centerX, centerY) > radius)
+                return true;
+            if(getDistanceOneDouble(two.getX(), two.getY(), centerX, centerY) > radius)
+                return true;
+            if(getDistanceOneDouble(three.getX(), three.getY(), centerX, centerY) > radius)
+                return true;
+        }
         return false;
     }
+    /**
+     * 
+     * @return true if there exists at least one set of three consecutive data points which form an angle such that:
+     * angle < (PI−EPSILON)
+     * or
+     * angle > (PI+EPSILON)
+     * else false
+     **/
     private Boolean LIC2() {
+        List<Coordinate> points = param.getPOINTS();
+        int numPoints = param.getNUMPOINTS();
+        if(numPoints < 3)
+            return false;
+        double epsilon = param.getEPSILON();
+        for (int i = 0; i < numPoints-2; i++) {
+            Coordinate one = points.get(i);
+            Coordinate two = points.get(i+1);
+            Coordinate three = points.get(i+2);
+            //sets vector a and b in relating to the second point
+            int xa = one.getX()-two.getX();
+            int ya = one.getY()-two.getY();
+            int xb = three.getX()-two.getX();
+            int yb = three.getY()-two.getY();
+            double angle = Math.acos((xa * xb + ya * yb) / Math.sqrt(Math.pow(xa, 2) + Math.pow(ya, 2)) * Math.sqrt(Math.pow(xb, 2) + Math.pow(yb, 2)));
+            if(angle < Math.PI-epsilon)
+                return true;
+            if(angle > Math.PI+epsilon)
+                return true;
+        }
         return false;
     }
+
+	/*
+	 *
+	 * @return true if there exists at least one set of three consecutive data points that are the vertices of a triangle with area greater than AREA1
+	 */
     private Boolean LIC3() {
-        return false;
+		List<Coordinate> points = param.getPOINTS();
+		int numPoints = param.getNUMPOINTS();
+		if (numPoints < 3)
+			return false;
+		double area1 = param.getAREA1();
+		for (int i = 0; i < numPoints - 2; i++) {
+			Coordinate one = points.get(i);
+			Coordinate two = points.get(i+1);
+			Coordinate three = points.get(i+2);
+			double area = (one.getX() * (two.getY() - three.getY()) + two.getX() * (three.getY() - one.getY()) + three.getX() * (one.getY() - two.getY())) / 2.0f;
+			if (Math.abs(area) > area1)
+				return true;
+		}
+		return false;
     }
+
+	/*
+	 *
+	 * @return true when there exists at least one set of Q PTS consecutive data points that lie in more than QUADS quadrants.
+	 */
     private Boolean LIC4() {
-        return false;
+		List<Coordinate> points = param.getPOINTS();
+		int numPoints = param.getNUMPOINTS();
+		int q_pts = param.getQ_PTS();
+		int quads = param.getQUADS();
+
+		for (int i = 0; i < numPoints - q_pts + 1; i++) {
+			int quadrant_1 = 0;
+			int quadrant_2 = 0;
+			int quadrant_3 = 0;
+			int quadrant_4 = 0;
+			for (int j = i; j < q_pts; j++) {
+				Coordinate cur_point = points.get(j);
+				int x = cur_point.getX();
+				int y = cur_point.getY();
+				if (x > 0) {
+					if (y >= 0) {
+						quadrant_1 = 1;
+					} else if (y < 0) {
+						quadrant_4 = 1;
+					}
+				} else if (x < 0) {
+					if (y >= 0) {
+						quadrant_2 = 1;
+					} else if (y < 0) {
+						quadrant_3 = 1;
+					}
+				} else {
+					if (y >= 0) {
+						quadrant_1 = 1;
+					} else if (y < 0) {
+						quadrant_3 = 1;
+					}
+				}
+
+				if ((quadrant_1 + quadrant_2 + quadrant_3 + quadrant_4) > quads)
+					return true;
+			}
+		}
+		return false;
     }
+
+	/*
+	 *
+	 * @return true There exists at least one set of two consecutive data points, (X[i],Y[i]) and (X[j],Y[j]), such that X[j] - X[i] < 0.
+	 */
     private Boolean LIC5() {
-        return false;
-    }
+		List<Coordinate> points = param.getPOINTS();
+		int numPoints = param.getNUMPOINTS();
+		if (numPoints < 2)
+			return false;
+
+		for (int i = 0; i < numPoints - 1; i++) {
+			Coordinate one = points.get(i);
+			Coordinate two = points.get(i + 1);
+			if (two.getX() - one.getX() < 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/*
+	* @return true if there exists at least one point in set which is closer than dist to the line from first to last point.
+	*/
     private Boolean LIC6() {
-        return false;
+		List<Coordinate> points = param.getPOINTS();
+		int numpoints = param.getNUMPOINTS();
+		int dist = param.getDIST();
+		Coordinate firstPoint = points.get(0);
+		Coordinate lastPoint = points.get(points.size()-1);
+		if(numpoints<3) {
+			return false;
+		}
+		for(int i = 1; i < points.size()-1; i++) {
+			double distance = Math.abs((lastPoint.getX() - firstPoint.getX()) * (firstPoint.getY() - points.get(i).getY())
+					- (firstPoint.getX() - points.get(i).getX()) * (lastPoint.getY() - firstPoint.getY()))
+					/ Math.sqrt(Math.pow(lastPoint.getX() - firstPoint.getX(), 2) + Math.pow(lastPoint.getY() - firstPoint.getY(), 2));
+			if(distance > dist) {
+				return true;
+			}
+		}
+		return false;
     }
+
 
     /**
      * @return true if there exists a set of two datapoints separated by K_PTS with distance > length1
@@ -130,23 +283,223 @@ public class CMV {
     private Boolean LIC11() {
         return false;
     }
+	
+	/*
+	* Checks if there exists at least one set two points seperated by K_PTS 
+	* consecutive intervening points that are at a distance greater than LENGTH1 
+	* as well as lesser than LENGTH2. The set of points can be the same
+	* 
+	* Both Must be present for the LIC to return true
+	* Returns false if there are less than 3 NUMPOINTS
+	* Lengths are greater than or equal to 0
+	*/
     private Boolean LIC12() {
+		// Get all values required to calculating conditions
+		List<Coordinate> points = param.getPOINTS();
+		int numPoints = param.getNUMPOINTS();
+		
+		int k_pts = param.getK_PTS();
+		int length1 = param.getLENGTH1();
+		int length2 = param.getLENGTH2();
+		
+		// If the number of points are less than 3 return false
+		if(numPoints < 3){
+			return false;
+		}
+		
+		// The two conditions
+		boolean greater_than_length1 = false;
+		boolean lesser_than_length2 = false;
+		
+		for(int i = 0; i < numPoints && i + k_pts + 1 < numPoints; i++){
+			Integer firstPointX = points.get(i).getX();
+			Integer firstPointY = points.get(i).getY();
+			
+			Integer secondPointX = points.get(i + k_pts + 1).getX();
+			Integer secondPointY = points.get(i + k_pts + 1).getY();
+			
+			double distance = getDistance(firstPointX, firstPointY, secondPointX, secondPointY);
+			
+			if(distance > length1 ){
+				greater_than_length1 = true;
+			}
+			if(distance < length2){
+				lesser_than_length2 = true;
+			}
+			
+			// If both conditions are met return true
+			if(greater_than_length1 && lesser_than_length2){
+				return true;
+			}
+		}
+		
+		// Otherwise return false
         return false;
     }
+	
+	/*
+	* Checks if there is at least one set of three points seperated by A_PTS and
+	* B_PTS respectively consecutive intervening points that cannot be contained or 
+	* exists on a circle of a radius of RADIUS1 as well as one of a radius of RADIUS2. 
+	* The set of points can either be the same or different
+	*
+	* Both Must be present for the LIC to return true
+	* Returns false if there are less than 5 NUMPOINTS
+	* radius are greater than or equal to 0
+	*/
     private Boolean LIC13() {
+        // Get all values required to calculating conditions
+		List<Coordinate> points = param.getPOINTS();
+		int numPoints = param.getNUMPOINTS();
+		
+		int a_pts = param.getA_PTS();
+		int b_pts = param.getB_PTS();
+		int radius1 = param.getRADIUS1();
+		int radius2 = param.getRADIUS2();	
+		
+		// If the number of points are less than 5 return false
+		if(numPoints < 5){
+			return false;
+		}
+		
+		// The two conditions
+		boolean fits_radius1 = false;
+		boolean fits_radius2 = false;
+		
+		for(int i = 0; i < numPoints && i + a_pts + 1 < numPoints && i + b_pts + 1 < numPoints; i++){
+			Integer firstPointX = points.get(i).getX();
+			Integer firstPointY = points.get(i).getY();
+			
+			Integer secondPointX = points.get(i + a_pts + 1).getX();
+			Integer secondPointY = points.get(i + a_pts + 1).getY();
+			
+			Integer thirdPointX = points.get(i + b_pts + 1).getX();
+			Integer thirdPointY = points.get(i + b_pts + 1).getY();
+			
+			double distanceFirstToSecond = getDistance(firstPointX, firstPointY, secondPointX, secondPointY);
+			double distanceSecondToThird = getDistance(secondPointX, secondPointY, thirdPointX, thirdPointY);
+			double distanceFirstToThird = getDistance(firstPointX, firstPointY, thirdPointX, thirdPointY);
+			
+			// Checks that the destance between the points are less or equal to the radius
+			// Assumes that one of the points are the middle of the circle
+			
+			// First point middle
+			if(distanceFirstToSecond <= radius1 && distanceFirstToThird <= radius1){
+				fits_radius1 = true;
+			}
+			// second point middle
+			if(distanceFirstToSecond <= radius1 && distanceSecondToThird <= radius1){
+				fits_radius1 = true;
+			}
+			// third point middle
+			if(distanceFirstToThird <= radius1 && distanceSecondToThird <= radius1){
+				fits_radius1 = true;
+			}
+			
+			
+			// First point middle
+			if(distanceFirstToSecond <= radius2 && distanceFirstToThird <= radius2){
+				fits_radius2 = true;
+			}
+			// second point middle
+			if(distanceFirstToSecond <= radius2 && distanceSecondToThird <= radius2){
+				fits_radius2 = true;
+			}
+			// third point middle
+			if(distanceFirstToThird <= radius2 && distanceSecondToThird <= radius2){
+				fits_radius2 = true;
+			}
+
+			
+			
+			// If both conditions are met return true
+			if(fits_radius1 && fits_radius2){
+				return true;
+			}
+		}
+		
+		// Otherwise return false
         return false;
     }
+	
+	/*
+	* Checks if there is at least one set of three points seperated by E_PTS respectively 
+	* and F_PTS consecutive intervening points that are the vertices of a triangle of an 
+	* area greater than AREA1 as well as one of an area less than AREA2. The
+	* set of points can either be the same or different
+	*
+	* Both Must be present for the LIC to return true
+	* Returns false if there are less than 5 NUMPOINTS
+	* Areas are greater than or equal to 0
+	*/
     private Boolean LIC14() {
+		// Get all values required to calculating conditions
+		List<Coordinate> points = param.getPOINTS();
+		int numPoints = param.getNUMPOINTS();
+		
+		int e_pts = param.getE_PTS();
+		int f_pts = param.getF_PTS();
+		int area1 = param.getAREA1();
+		int area2 = param.getAREA2();
+		
+		// If the number of points are less than 5 return false
+		if(numPoints < 5){
+			return false;
+		}
+		
+		// The two conditions
+		boolean greater_than_area1 = false;
+		boolean lesser_than_area2 = false;
+		
+		for(int i = 0; i < numPoints && i + e_pts + 1< numPoints && i + f_pts + 1 < numPoints; i++){
+			Integer firstPointX = points.get(i).getX();
+			Integer firstPointY = points.get(i).getY();
+			
+			Integer secondPointX = points.get(i + e_pts + 1).getX();
+			Integer secondPointY = points.get(i + e_pts + 1).getY();
+			
+			Integer thirdPointX = points.get(i + f_pts + 1).getX();
+			Integer thirdPointY = points.get(i + f_pts + 1).getY();
+			
+			// Area of a triangle based upon three points
+			// absolute value((x1(y2 - y3) + x2(y3 - y1) + x3(y1 - y2)) / 2)
+			double area = Math.abs((firstPointX * (secondPointY - thirdPointY) + secondPointX * (thirdPointY - firstPointY) + thirdPointX * (firstPointY - secondPointY)) / 2);
+			
+			if(area > area1 ){
+				greater_than_area1 = true;
+			}
+			if(area < area2){
+				lesser_than_area2 = true;
+			}
+			
+			// If both conditions are met return true
+			if(greater_than_area1 && lesser_than_area2){
+				return true;
+			}
+		}
+		
+		// Otherwise return false
         return false;
     }
+  
     /*
 	* Functions that returns the distance between two points in a 2D plane
+    * All integers
 	*/
 	private double getDistance(Integer firstPointX, Integer firstPointY, Integer secondPointX, Integer secondPointY){
 		// Distance formula
 		// distance = squareroot((x2 - x1)^2 + (y2 - y1)^2)
 		double distance = Math.sqrt(Math.pow((secondPointX - firstPointX), 2) + Math.pow((secondPointY - firstPointY), 2));
-
+		return distance;
+	}
+    /*
+	* Functions that returns the distance between two points in a 2D plane
+    * First point is integer and second point is double
+	*/
+	private double getDistanceOneDouble(Integer firstPointX, Integer firstPointY, double secondPointX, double secondPointY){
+		// Distance formula
+		// distance = squareroot((x2 - x1)^2 + (y2 - y1)^2)
+		double distance = Math.sqrt(Math.pow((secondPointX - firstPointX), 2) + Math.pow((secondPointY - firstPointY), 2));
 		return distance;
 	}
 
