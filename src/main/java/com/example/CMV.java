@@ -1,7 +1,6 @@
 package com.example;
 import java.util.List;
 
-import java.util.List;
 import java.lang.Math;
 
 public class CMV {
@@ -194,9 +193,30 @@ public class CMV {
 		return false;
 	}
 
+	/*
+	* @return true if there exists at least one point in set which is closer than dist to the line from first to last point.
+	*/
     private Boolean LIC6() {
-        return false;
+		List<Coordinate> points = param.getPOINTS();
+		int numpoints = param.getNUMPOINTS();
+		int dist = param.getDIST();
+		Coordinate firstPoint = points.get(0);
+		Coordinate lastPoint = points.get(points.size()-1);
+		if(numpoints<3) {
+			return false;
+		}
+		for(int i = 1; i < points.size()-1; i++) {
+			double distance = Math.abs((lastPoint.getX() - firstPoint.getX()) * (firstPoint.getY() - points.get(i).getY())
+					- (firstPoint.getX() - points.get(i).getX()) * (lastPoint.getY() - firstPoint.getY()))
+					/ Math.sqrt(Math.pow(lastPoint.getX() - firstPoint.getX(), 2) + Math.pow(lastPoint.getY() - firstPoint.getY(), 2));
+			if(distance > dist) {
+				return true;
+			}
+		}
+		return false;
     }
+
+
     private Boolean LIC7() {
         List<Coordinate> points = param.getPOINTS();
         int k_pts = param.getK_PTS();
