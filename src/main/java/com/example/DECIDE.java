@@ -25,11 +25,16 @@ public class DECIDE
         this.param = param;
         cmv = new CMV(param);
         pum = new PUM(cmv, lcm);
-        //fuv = new FUV(pum, puv); //CHANGE TO SIMPLY REQUIRE THE PUM MATRIX
-        setLAUNCH();
+        //fuv = new FUV(pum, puv); //CHANGE TO SIMPLY REQUIRE THE PUM MATRIX (meaning pum.getPUM()
+        launch = getLAUNCH(fuv.getFUVVector());
     }
-    public void setLAUNCH() {
-
+    public static LAUNCH getLAUNCH(Boolean[] fuv) {
+        for (Boolean b : fuv) {
+            if(!b){
+                return LAUNCH.NO;
+            }
+        }
+        return LAUNCH.YES;
     }
 
     public static void main( String[] args )

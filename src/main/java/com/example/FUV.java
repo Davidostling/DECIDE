@@ -50,4 +50,9 @@ public class FUV {
 	public boolean getFUV(int index){
 		return fuv[index];
 	}
+
+    public Boolean[] getFUVVector(){
+        return fuv;
+    }
+
 }
