@@ -258,12 +258,12 @@ public class CMV {
 		boolean greater_than_length1 = false;
 		boolean lesser_than_length2 = false;
 		
-		for(int i = 0; i < numPoints && i + k_pts < numPoints; i++){
+		for(int i = 0; i < numPoints && i + k_pts + 1 < numPoints; i++){
 			Integer firstPointX = points.get(i).getX();
 			Integer firstPointY = points.get(i).getY();
 			
-			Integer secondPointX = points.get(i + k_pts).getX();
-			Integer secondPointY = points.get(i + k_pts).getY();
+			Integer secondPointX = points.get(i + k_pts + 1).getX();
+			Integer secondPointY = points.get(i + k_pts + 1).getY();
 			
 			double distance = getDistance(firstPointX, firstPointY, secondPointX, secondPointY);
 			
@@ -313,15 +313,15 @@ public class CMV {
 		boolean fits_radius1 = false;
 		boolean fits_radius2 = false;
 		
-		for(int i = 0; i < numPoints && i + a_pts < numPoints && i + b_pts < numPoints; i++){
+		for(int i = 0; i < numPoints && i + a_pts + 1 < numPoints && i + b_pts + 1 < numPoints; i++){
 			Integer firstPointX = points.get(i).getX();
 			Integer firstPointY = points.get(i).getY();
 			
-			Integer secondPointX = points.get(i + a_pts).getX();
-			Integer secondPointY = points.get(i + a_pts).getY();
+			Integer secondPointX = points.get(i + a_pts + 1).getX();
+			Integer secondPointY = points.get(i + a_pts + 1).getY();
 			
-			Integer thirdPointX = points.get(i + b_pts).getX();
-			Integer thirdPointY = points.get(i + b_pts).getY();
+			Integer thirdPointX = points.get(i + b_pts + 1).getX();
+			Integer thirdPointY = points.get(i + b_pts + 1).getY();
 			
 			double distanceFirstToSecond = getDistance(firstPointX, firstPointY, secondPointX, secondPointY);
 			double distanceSecondToThird = getDistance(secondPointX, secondPointY, thirdPointX, thirdPointY);
@@ -398,15 +398,15 @@ public class CMV {
 		boolean greater_than_area1 = false;
 		boolean lesser_than_area2 = false;
 		
-		for(int i = 0; i < numPoints && i + e_pts < numPoints && i + f_pts < numPoints; i++){
+		for(int i = 0; i < numPoints && i + e_pts + 1< numPoints && i + f_pts + 1 < numPoints; i++){
 			Integer firstPointX = points.get(i).getX();
 			Integer firstPointY = points.get(i).getY();
 			
-			Integer secondPointX = points.get(i + e_pts).getX();
-			Integer secondPointY = points.get(i + e_pts).getY();
+			Integer secondPointX = points.get(i + e_pts + 1).getX();
+			Integer secondPointY = points.get(i + e_pts + 1).getY();
 			
-			Integer thirdPointX = points.get(i + f_pts).getX();
-			Integer thirdPointY = points.get(i + f_pts).getY();
+			Integer thirdPointX = points.get(i + f_pts + 1).getX();
+			Integer thirdPointY = points.get(i + f_pts + 1).getY();
 			
 			// Area of a triangle based upon three points
 			// absolute value((x1(y2 - y3) + x2(y3 - y1) + x3(y1 - y2)) / 2)
