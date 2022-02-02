@@ -51,8 +51,7 @@ to be launched.
 ???
 
 # Statement of contributions
-Johan
-I created the repository and set up Maven. I also set up ci with github actions to have the code compiled and tested when a PR or push is made to the main branch. I also structured the program in classes and methods together with David. I set up all the issues for the program.
+Johan: I created the repository and set up Maven. I also set up ci with github actions to have the code compiled and tested when a PR or push is made to the main branch. I also structured the program in classes and methods together with David. I set up all the issues for the program.
 I coded LIC0, LIC1 and LIC2 including tests. I created the assignment of PUM including the test for Example 1.
 
 Program specification (January 1986):
