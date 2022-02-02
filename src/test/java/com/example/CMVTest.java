@@ -50,8 +50,8 @@ public class CMVTest{
 		param.setAREA1(3);
 		param.setQ_PTS(2);
 		param.setQUADS(2);
-		param.setN_PTS();
-		param.setDIST();
+		param.setN_PTS(4);
+		param.setDIST(2);
 		param.setK_PTS(2);
 		param.setA_PTS(2);
 		param.setB_PTS(3);
@@ -60,7 +60,7 @@ public class CMVTest{
 		param.setE_PTS(2);
 		param.setF_PTS(3);
 		param.setG_PTS(1);
-		param.setK_PTS();
+		param.setK_PTS(2);
 		param.setLENGTH2(10);
 		param.setRADIUS2(10);
 		param.setAREA2(6);
@@ -68,13 +68,13 @@ public class CMVTest{
 		cmv = new CMV(param);
 		assertTrue(cmv.getCMV(0));
 		assertTrue(cmv.getCMV(1));
-		assertFalse(cmv.getCMV(2));
+		assertTrue(cmv.getCMV(2));
 		assertTrue(cmv.getCMV(3));
 		assertFalse(cmv.getCMV(4));
 		assertTrue(cmv.getCMV(5));
 		assertTrue(cmv.getCMV(6));
 		assertTrue(cmv.getCMV(7));
-		assertTrue(cmv.getCMV(8));
+		assertFalse(cmv.getCMV(8));
 		assertTrue(cmv.getCMV(9));
 		assertTrue(cmv.getCMV(10));
 		assertTrue(cmv.getCMV(11));
