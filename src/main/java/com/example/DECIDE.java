@@ -24,8 +24,8 @@ public class DECIDE
     public DECIDE(Parameters param, LCM[][] lcm, Boolean[] puv){
         this.param = param;
         cmv = new CMV(param);
-        pum = new PUM(cmv, lcm);
-        //fuv = new FUV(pum, puv); //CHANGE TO SIMPLY REQUIRE THE PUM MATRIX (meaning pum.getPUM()
+        pum = new PUM(cmv.getCMVVector(), lcm);
+        fuv = new FUV(pum.getPUMMatrix(), puv);
         launch = getLAUNCH(fuv.getFUVVector());
     }
     public static LAUNCH getLAUNCH(Boolean[] fuv) {
