@@ -278,12 +278,83 @@ public class CMV {
     }
 
     private Boolean LIC9() {
+        List<Coordinate> points = param.getPOINTS();
+        int numPoints = param.getNUMPOINTS();
+        if(numPoints < 3 || 1 > param.getC_PTS() || 1 > param.getD_PTS() || param.getC_PTS()+param.getD_PTS()>numPoints-3)
+            return false;
+        double epsilon = param.getEPSILON();
+        for (int i = 0; i < numPoints-param.getC_PTS() - param.getD_PTS()-2; i++) {
+            Coordinate one = points.get(i);
+            Coordinate two = points.get(i+param.getC_PTS()+1);
+            Coordinate three = points.get(i+param.getD_PTS()+2);
+            //sets vector a and b in relating to the second point
+            int xa = one.getX()-two.getX();
+            int ya = one.getY()-two.getY();
+            int xb = three.getX()-two.getX();
+            int yb = three.getY()-two.getY();
+            double angle = Math.acos((xa * xb + ya * yb) / Math.sqrt(Math.pow(xa, 2) + Math.pow(ya, 2)) * Math.sqrt(Math.pow(xb, 2) + Math.pow(yb, 2)));
+            if(angle < Math.PI-epsilon)
+                return true;
+            if(angle > Math.PI+epsilon)
+                return true;
+        }
         return false;
     }
+
     private Boolean LIC10() {
+
+        // There exists at least one set of three data points separated by exactly C PTS
+        // and D PTS consecutive intervening points
+
+        // When NUMPOINTS < 5, the condition is not met. The intervals presented below are the ones that are not included
+        if (param.getNUMPOINTS() < 5 || 1 > param.getE_PTS() || 1 > param.getF_PTS() || param.getE_PTS()+param.getF_PTS()>param.getNUMPOINTS()-3){
+            return false;
+        }
+		
+
+        for(int i = 0; i < param.getNUMPOINTS() - param.getE_PTS() - param.getF_PTS()-2; i++){
+
+			int xa = (param.POINTS.get(i).getX());
+			int ya = (param.POINTS.get(i).getY());
+			int xb = param.POINTS.get(i+param.getE_PTS()+1).getX();
+			int yb = param.POINTS.get(i+param.getE_PTS()+1).getY();
+			int xc = param.POINTS.get(i+param.getF_PTS()+2).getX();
+			int yc = param.POINTS.get(i+param.getF_PTS()+2).getY();
+
+            //We set all x and y values and then calculate the area by viewing all the coords as a 1/2 determinant with all x values as the first column, all the y values as the second column and a third column filled with 1:s, this gives us:
+            double foundarea = 0.5*Math.abs((xa*(yb-yc)+xb*(yc-ya)+xc*(ya-yb)));
+
+
+            //Check if the condition is met
+            if (param.getAREA1() < foundarea){
+                return true;
+            }
+        }
+        
+
         return false;
     }
+
     private Boolean LIC11() {
+        /*
+         * There exists at least one set of two data points, (X[i],Y[i]) and
+         * (X[j],Y[j]), separated by exactly G PTS consecutive intervening points, such
+         * that X[j] - X[i] < 0. (where i < j ) The condition is not met when NUMPOINTS
+         * < 3.
+         * 1 ≤ G PTS ≤ NUMPOINTS−2
+         */
+        if (param.getNUMPOINTS() < 3 || 1 > param.getG_PTS() || param.getG_PTS() > param.getNUMPOINTS()-2) {
+            return false;
+        }
+
+        for (int i = 0; i < param.getNUMPOINTS() - param.getG_PTS() - 1; i++) {
+            if ((param.getPOINTS().get(i + param.getG_PTS() + 1).getX()) - (param.getPOINTS().get(i).getX()) < 0) {
+
+                return true;
+            }
+
+        }
+
         return false;
     }
 	

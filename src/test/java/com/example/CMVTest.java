@@ -482,4 +482,107 @@ public class CMVTest{
 		assertFalse(cmv.getCMV(6));
 	}
 
+
+	@Test
+    public void lic9_true(){
+		points.add(new Coordinate(0,0));
+		points.add(new Coordinate(0,2));
+		points.add(new Coordinate(1,1));
+		points.add(new Coordinate(1,1));
+		points.add(new Coordinate(3,1));
+		
+		param = new Parameters(points.size(), points);
+		param.setEPSILON(1);
+		param.setC_PTS(1);
+		param.setD_PTS(1);
+		
+		cmv = new CMV(param);
+		
+        assertTrue(cmv.getCMV(9));
+    }
+    @Test
+    public void lic9_false(){
+		points.add(new Coordinate(0, 0));
+        points.add(new Coordinate(1, 0));
+        points.add(new Coordinate(1, 1));
+        points.add(new Coordinate(2, 0));
+        points.add(new Coordinate(4, 1));
+
+		param = new Parameters(points.size(), points);
+		param.setEPSILON(Math.PI);
+		param.setC_PTS(1);
+		param.setD_PTS(1);
+		
+		
+		cmv = new CMV(param);
+		
+        assertFalse(cmv.getCMV(9));
+    
+    }
+
+    @Test
+    public void lic10_true(){
+		points.add(new Coordinate(0, 0));
+        points.add(new Coordinate(1, 0));
+        points.add(new Coordinate(1, 8));
+        points.add(new Coordinate(2, 0));
+        points.add(new Coordinate(4, 1));
+		
+		param = new Parameters(points.size(), points);
+		param.setAREA1(1);
+		param.setE_PTS(1);
+		param.setF_PTS(1);
+		
+		cmv = new CMV(param);
+		
+        assertTrue(cmv.getCMV(10));
+    }
+
+    @Test
+    public void lic10_false(){
+		points.add(new Coordinate(0,0));
+		points.add(new Coordinate(0,2));
+		points.add(new Coordinate(1,1));
+		
+		
+		param = new Parameters(points.size(), points);
+		
+		param.setE_PTS(0);
+		param.setF_PTS(0);
+		
+		
+		cmv = new CMV(param);
+		
+        assertFalse(cmv.getCMV(10));
+    
+    }
+
+    @Test 
+    public void lic11_true(){
+        points.add(new Coordinate(0, 0));
+        points.add(new Coordinate(1, 0));
+        points.add(new Coordinate(5, 1));
+        points.add(new Coordinate(2, 0));
+        points.add(new Coordinate(4, 1));
+
+        Parameters param = new Parameters(points.size(), points);
+        param.setG_PTS(1);
+
+        cmv = new CMV(param);
+        assertTrue(cmv.getCMV(11));
+    }
+	
+    @Test
+    public void lic11_false(){
+        points.add(new Coordinate(0,0));
+		points.add(new Coordinate(1,1));
+		param = new Parameters(points.size(), points);
+		
+		param.setG_PTS(0);
+		
+
+		cmv = new CMV(param);
+		assertFalse(cmv.getCMV(6));
+	}
+
 }
