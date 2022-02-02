@@ -68,6 +68,8 @@ David: Me and Johan created the skeleton for the program by forming the classes 
 
 Zehao: I implemented LIC3, LIC4 and LIC5 and their corresponding three unit tests. I also set up the skeleton code for the whole test for CMV function. 
 
+Vilma: Implemented LIC6, LIC7 and LIC7 as well as the appropriate tests to accompany them.
+
 Program specification (January 1986):
 - J. C. Knight
 - N. G. Leveson
