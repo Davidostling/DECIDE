@@ -462,7 +462,18 @@ public class CMVTest{
 		assertTrue(cmv.getCMV(5));
 	}
 	@Test
-	public void lic6_true() {
+	public void lic6_true_one() {
+		points.add(new Coordinate(0, 0));
+		points.add(new Coordinate(5, 5));
+		points.add(new Coordinate(10, 10));
+		points.add(new Coordinate(0, 0));
+		Parameters param = new Parameters(points.size(), points);
+		param.setDIST(3);
+		cmv = new CMV(param);
+		assertTrue(cmv.getCMV(6));
+	}
+	@Test
+	public void lic6_true_two() {
 		points.add(new Coordinate(0, 0));
 		points.add(new Coordinate(5, 5));
 		points.add(new Coordinate(10, 0));
@@ -472,7 +483,18 @@ public class CMVTest{
 		assertTrue(cmv.getCMV(6));
 	}
 	@Test
-	public void lic6_false() {
+	public void lic6_false_one() {
+		points.add(new Coordinate(0, 0));
+		points.add(new Coordinate(5, 5));
+		points.add(new Coordinate(10, 10));
+		points.add(new Coordinate(0, 0));
+		Parameters param = new Parameters(points.size(), points);
+		param.setDIST(15);
+		cmv = new CMV(param);
+		assertFalse(cmv.getCMV(6));
+	}
+	@Test
+	public void lic6_false_two() {
 		points.add(new Coordinate(0, 0));
 		points.add(new Coordinate(5, 5));
 		points.add(new Coordinate(10, 0));
