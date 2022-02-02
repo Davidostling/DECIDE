@@ -19,7 +19,70 @@ public class CMVTest{
 	Parameters param;
 	CMV cmv;
 
-	
+
+	@Test
+	public void CMV_whole_true(){
+		points.add(new Coordinate(0,0));
+		points.add(new Coordinate(0,2));
+		points.add(new Coordinate(1,1));
+		points.add(new Coordinate(1,1));
+		points.add(new Coordinate(3,1));
+		points.add(new Coordinate(1,1));
+		points.add(new Coordinate(2,1));
+		points.add(new Coordinate(3,1));
+		points.add(new Coordinate(4,1));
+		points.add(new Coordinate(-2, -3));
+		points.add(new Coordinate(-5, 4));
+		points.add(new Coordinate(2, 6));
+		points.add(new Coordinate(0, -9));
+		points.add(new Coordinate(0, -6));
+		points.add(new Coordinate(4, 4));
+		points.add(new Coordinate(1, -10));
+		points.add(new Coordinate(-5, 1));
+		points.add(new Coordinate(-4, -8));
+		points.add(new Coordinate(8, 6));
+
+		param = new Parameters(points.size(), points);
+
+		param.setLENGTH1(5);
+		param.setRADIUS1(8);
+		param.setEPSILON(Math.PI/2);
+		param.setAREA1(3);
+		param.setQ_PTS(2);
+		param.setQUADS(2);
+		param.setN_PTS(4);
+		param.setDIST(2);
+		param.setK_PTS(2);
+		param.setA_PTS(2);
+		param.setB_PTS(3);
+		param.setC_PTS(1);
+		param.setD_PTS(1);
+		param.setE_PTS(2);
+		param.setF_PTS(3);
+		param.setG_PTS(1);
+		param.setK_PTS(2);
+		param.setLENGTH2(10);
+		param.setRADIUS2(10);
+		param.setAREA2(6);
+
+		cmv = new CMV(param);
+		assertTrue(cmv.getCMV(0));
+		assertTrue(cmv.getCMV(1));
+		assertTrue(cmv.getCMV(2));
+		assertTrue(cmv.getCMV(3));
+		assertFalse(cmv.getCMV(4));
+		assertTrue(cmv.getCMV(5));
+		assertTrue(cmv.getCMV(6));
+		assertTrue(cmv.getCMV(7));
+		assertFalse(cmv.getCMV(8));
+		assertTrue(cmv.getCMV(9));
+		assertTrue(cmv.getCMV(10));
+		assertTrue(cmv.getCMV(11));
+		assertTrue(cmv.getCMV(12));
+		assertTrue(cmv.getCMV(13));
+		assertTrue(cmv.getCMV(14));
+	}
+
     /**
      * 
      */
