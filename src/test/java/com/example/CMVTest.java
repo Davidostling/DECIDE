@@ -19,24 +19,25 @@ public class CMVTest{
 	Parameters param;
 	CMV cmv;
 
+
 	@Test
 	public void CMV_whole_true(){
-		points.add(new Coordinate(-2, -3);
-		points.add(new Coordinate(-5, 4);
-		points.add(new Coordinate(2, 6);
-		points.add(new Coordinate(0, -9);
-		points.add(new Coordinate(0, -6);
-		points.add(new Coordinate(4, 4);
-		points.add(new Coordinate(1, -10);
-		points.add(new Coordinate(-5, 1);
-		points.add(new Coordinate(-4, -8);
-		points.add(new Coordinate(8, 6);
+		points.add(new Coordinate(-2, -3));
+		points.add(new Coordinate(-5, 4));
+		points.add(new Coordinate(2, 6));
+		points.add(new Coordinate(0, -9));
+		points.add(new Coordinate(0, -6));
+		points.add(new Coordinate(4, 4));
+		points.add(new Coordinate(1, -10));
+		points.add(new Coordinate(-5, 1));
+		points.add(new Coordinate(-4, -8));
+		points.add(new Coordinate(8, 6));
 
 		param = new Parameters(points.size(), points);
 
 		param.setLENGTH1(5);
 		param.setRADIUS1(8);
-		param.setEPSILON();
+		param.setEPSILON(Math.PI/2);
 		param.setAREA1(3);
 		param.setQ_PTS(2);
 		param.setQUADS(2);
@@ -58,7 +59,7 @@ public class CMVTest{
 		cmv = new CMV(param);
 		assertTrue(cmv.getCMV(0));
 		assertTrue(cmv.getCMV(1));
-		assertTrue(cmv.getCMV(2));
+		assertFalse(cmv.getCMV(2));
 		assertTrue(cmv.getCMV(3));
 		assertFalse(cmv.getCMV(4));
 		assertTrue(cmv.getCMV(5));
@@ -72,8 +73,6 @@ public class CMVTest{
 		assertTrue(cmv.getCMV(13));
 		assertTrue(cmv.getCMV(14));
 	}
-
-
 
     /**
      * 
