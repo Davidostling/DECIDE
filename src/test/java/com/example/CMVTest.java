@@ -101,7 +101,7 @@ public class CMVTest{
 	@Test
     public void lic13_one_true(){
 		points.add(new Coordinate(0,0));
-	    	points.add(new Coordinate(0,1));
+		points.add(new Coordinate(0,1));
 		points.add(new Coordinate(0,2));
 		points.add(new Coordinate(1,1)); 
 		points.add(new Coordinate(2,1)); 
@@ -428,6 +428,26 @@ public class CMVTest{
 
 		cmv = new CMV(param);
 		assertTrue(cmv.getCMV(5));
+	}
+	@Test
+	public void lic6_true() {
+		points.add(new Coordinate(0, 0));
+		points.add(new Coordinate(5, 5));
+		points.add(new Coordinate(10, 0));
+		Parameters param = new Parameters(points.size(), points);
+		param.setDIST(3);
+		cmv = new CMV(param);
+		assertTrue(cmv.getCMV(6));
+	}
+	@Test
+	public void lic6_false() {
+		points.add(new Coordinate(0, 0));
+		points.add(new Coordinate(5, 5));
+		points.add(new Coordinate(10, 0));
+		Parameters param = new Parameters(points.size(), points);
+		param.setDIST(15);
+		cmv = new CMV(param);
+		assertFalse(cmv.getCMV(6));
 	}
 
 }
