@@ -22,6 +22,15 @@ public class CMVTest{
 
 	@Test
 	public void CMV_whole_true(){
+		points.add(new Coordinate(0,0));
+		points.add(new Coordinate(0,2));
+		points.add(new Coordinate(1,1));
+		points.add(new Coordinate(1,1));
+		points.add(new Coordinate(3,1));
+		points.add(new Coordinate(1,1));
+		points.add(new Coordinate(2,1));
+		points.add(new Coordinate(3,1));
+		points.add(new Coordinate(4,1));
 		points.add(new Coordinate(-2, -3));
 		points.add(new Coordinate(-5, 4));
 		points.add(new Coordinate(2, 6));
@@ -46,11 +55,11 @@ public class CMVTest{
 		param.setK_PTS(2);
 		param.setA_PTS(2);
 		param.setB_PTS(3);
-		param.setC_PTS();
-		param.setD_PTS();
+		param.setC_PTS(1);
+		param.setD_PTS(1);
 		param.setE_PTS(2);
 		param.setF_PTS(3);
-		param.setG_PTS();
+		param.setG_PTS(1);
 		param.setK_PTS();
 		param.setLENGTH2(10);
 		param.setRADIUS2(10);
