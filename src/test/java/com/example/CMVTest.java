@@ -282,6 +282,38 @@ public class CMVTest{
         cmv = new CMV(param);
         assertFalse(cmv.getCMV(7));
     }
+    @Test
+    public void lic8_true() {
+        points.add(new Coordinate(0, 0));
+        points.add(new Coordinate(0, -2));
+        points.add(new Coordinate(2, 0));
+        points.add(new Coordinate(-3, 0));
+        points.add(new Coordinate(5, 5));
+        points.add(new Coordinate(0, 6));
+        points.add(new Coordinate(3, 0));
+        Parameters param = new Parameters(points.size(), points);
+        param.setRADIUS1(2);
+        param.setA_PTS(2);
+        param.setB_PTS(2);
+        cmv = new CMV(param);
+        assertTrue(cmv.getCMV(8));
+    }
+    @Test
+    public void lic8_false() {
+        points.add(new Coordinate(0, 0));
+        points.add(new Coordinate(0, -2));
+        points.add(new Coordinate(2, 0));
+        points.add(new Coordinate(-3, 0));
+        points.add(new Coordinate(5, 5));
+        points.add(new Coordinate(0, 6));
+        points.add(new Coordinate(3, 0));
+        Parameters param = new Parameters(points.size(), points);
+        param.setRADIUS1(15);
+        param.setA_PTS(2);
+        param.setB_PTS(2);
+        cmv = new CMV(param);
+        assertFalse(cmv.getCMV(8));
+    }
 
     @Test
     public void lic2_true(){
