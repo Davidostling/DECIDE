@@ -230,7 +230,7 @@ public class CMV {
         for (int i = 0; i < numPoints-param.getC_PTS() - param.getD_PTS()-2; i++) {
             Coordinate one = points.get(i);
             Coordinate two = points.get(i+param.getC_PTS()+1);
-            Coordinate three = points.get(i+param.getC_PTS()+param.getD_PTS()+2);
+            Coordinate three = points.get(i+param.getD_PTS()+2);
             //sets vector a and b in relating to the second point
             int xa = one.getX()-two.getX();
             int ya = one.getY()-two.getY();
@@ -254,12 +254,19 @@ public class CMV {
         if (param.getNUMPOINTS() < 5 || 1 > param.getE_PTS() || 1 > param.getF_PTS() || param.getE_PTS()+param.getF_PTS()>param.getNUMPOINTS()-3){
             return false;
         }
-        
+		
+
         for(int i = 0; i < param.getNUMPOINTS() - param.getE_PTS() - param.getF_PTS()-2; i++){
+
+			int xa = (param.POINTS.get(i).getX());
+			int ya = (param.POINTS.get(i).getY());
+			int xb = param.POINTS.get(i+param.getE_PTS()+1).getX();
+			int yb = param.POINTS.get(i+param.getE_PTS()+1).getY();
+			int xc = param.POINTS.get(i+param.getF_PTS()+2).getX();
+			int yc = param.POINTS.get(i+param.getF_PTS()+2).getY();
+
             //We set all x and y values and then calculate the area by viewing all the coords as a 1/2 determinant with all x values as the first column, all the y values as the second column and a third column filled with 1:s, this gives us:
-            double foundarea = Math.abs(1/2*(param.POINTS.get(i).getX()*( param.POINTS.get(i+param.getE_PTS()+1).getY()-param.POINTS.get(i+param.getE_PTS()+param.getF_PTS()+2).getY())+
-            param.POINTS.get(i+param.getE_PTS()+1).getX()*(param.POINTS.get(i+param.getE_PTS()+param.getF_PTS()+2).getY()-param.POINTS.get(i).getY())+param.POINTS.get(i+param.getE_PTS()+
-            param.getF_PTS()+2).getX()*(param.POINTS.get(i).getY()-param.POINTS.get(i+param.getE_PTS()+1).getY())));
+            double foundarea = 0.5*Math.abs((xa*(yb-yc)+xb*(yc-ya)+xc*(ya-yb)));
 
 
             //Check if the condition is met
