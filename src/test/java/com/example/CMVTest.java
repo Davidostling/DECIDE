@@ -100,6 +100,7 @@ public class CMVTest{
 	@Test
     public void lic13_one_true(){
 		points.add(new Coordinate(0,0));
+	    	points.add(new Coordinate(0,1));
 		points.add(new Coordinate(0,2));
 		points.add(new Coordinate(1,1)); 
 		points.add(new Coordinate(2,1)); 
@@ -125,11 +126,12 @@ public class CMVTest{
 		points.add(new Coordinate(0,0));
 		points.add(new Coordinate(0,2));
 		points.add(new Coordinate(1,1)); 
-		points.add(new Coordinate(2,1)); 
+		points.add(new Coordinate(1,2));
+		points.add(new Coordinate(2,1));
 		points.add(new Coordinate(2,2));
-		points.add(new Coordinate(3,1)); 
+		points.add(new Coordinate(3,1));  
 		points.add(new Coordinate(3,2));
-		points.add(new Coordinate(4,3));
+		points.add(new Coordinate(4,3)); 
 		
 		param = new Parameters(points.size(), points);
 		
@@ -165,6 +167,7 @@ public class CMVTest{
 	@Test
     public void lic14_one_true(){
 		points.add(new Coordinate(0,0));
+	    	points.add(new Coordinate(0,1));
 		points.add(new Coordinate(0,2));
 		points.add(new Coordinate(1,1)); 
 		points.add(new Coordinate(2,1)); 
@@ -188,6 +191,7 @@ public class CMVTest{
 	@Test
     public void lic14_both_true(){
 		points.add(new Coordinate(0,0));
+	    	points.add(new Coordinate(0,1));
 		points.add(new Coordinate(0,2));
 		points.add(new Coordinate(1,1)); 
 		points.add(new Coordinate(2,1)); 
