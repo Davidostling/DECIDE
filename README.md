@@ -21,11 +21,12 @@ to be launched.
 - DECIDE(Parameters) : Creates a new DECIDE instance, sets up CMV, PUM, FUV and LAUNCH using Parameters
 - getLAUNCH() : Returns either true or false representing the choice of launching an interceptor
 
-**CMV:**
+**CMV: The class for calculating LICs**
 - CMV(Patrameters) : 
 - setCMV() :
 - getCMV(int) :
 
+**Includes the 15 different LIC functions**
 - LIC0()
 - LIC1()
 - LIC2()
@@ -43,16 +44,25 @@ to be launched.
 - LIC14()
 
 **PUM:**
+- PUM(Boolean[] CMVVector, LCM[][] LCMMatrix)
+- setPUM()
+- getPUMMatrix()
 
-**FUV:**
+**FUV: The class that generates the final vector used for calculating LAUNCH**
+- FUV(Boolean[][] PUMMatrix, Boolean[] PUVVector)
+- setFUV()
+- getFUV(int)
+- getFUVVector()
 
+**Coordinate: Class that allows for both the X and Y coordinate to be stored in one object**
 
-# License 
-???
+**Parameters: Class that holds all the different parameters used in the calculations for DECIDE**
 
 # Statement of contributions
 Johan: I created the repository and set up Maven. I also set up ci with github actions to have the code compiled and tested when a PR or push is made to the main branch. I also structured the program in classes and methods together with David. I set up all the issues for the program.
 I coded LIC0, LIC1 and LIC2 including tests. I created the assignment of PUM including the test for Example 1.
+
+Sebaztian: I programmed Lic12, LIC13, LIC14 and FUV with three unit tests included for each. Furthermore I also created the base structure for the documentation including writing the introduction to the project and the descriptions of the classes. 
 
 David: Me and Johan created the skeleton for the program by forming the classes and methods needed. I also coded LIC9, LIC10 and LIC11 together with their corresponding tests. I also wrote our way-of-working paragraph.
 
