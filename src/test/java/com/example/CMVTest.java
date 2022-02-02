@@ -34,26 +34,26 @@ public class CMVTest{
 
 		param = new Parameters(points.size(), points);
 
-		param.setLENGTH1();
-		param.setRADIUS1();
+		param.setLENGTH1(5);
+		param.setRADIUS1(8);
 		param.setEPSILON();
 		param.setAREA1(3);
 		param.setQ_PTS(2);
 		param.setQUADS(2);
 		param.setN_PTS();
 		param.setDIST();
-		param.setK_PTS();
-		param.setA_PTS();
-		param.setB_PTS();
+		param.setK_PTS(2);
+		param.setA_PTS(2);
+		param.setB_PTS(3);
 		param.setC_PTS();
 		param.setD_PTS();
-		param.setE_PTS();
-		param.setF_PTS();
+		param.setE_PTS(2);
+		param.setF_PTS(3);
 		param.setG_PTS();
 		param.setK_PTS();
-		param.setLENGTH2();
-		param.setRADIUS2();
-		param.setAREA2();
+		param.setLENGTH2(10);
+		param.setRADIUS2(10);
+		param.setAREA2(6);
 
 		cmv = new CMV(param);
 		assertTrue(cmv.getCMV(0));
