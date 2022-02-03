@@ -2,7 +2,6 @@
 DECIDE is a hypothetical anti-ballistic missile system that based upon 15 different 
 preset conditions decides whether one should launch an interceptor.
 
-PARAGRAPH DESCRIBING WHAT IT IS
 DECIDE uses a set of 15 different Launch Interceptor Conditions (LICs) to decide whether an interceptor 
 should be launched based upon an input of radar tracking information. Which is set into a Conditions Met 
 Vector (CMV). Something that is determined based upon if a relevant combination of the LICs are true for
